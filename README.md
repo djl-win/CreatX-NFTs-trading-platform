@@ -1,6 +1,3 @@
-# Note
-The project is not yet open source, some details are as follows, if necessary, please contact day.dong99@yahoo.com
-
 # CreatX-NFTs-trading-platform
 
 - This project is a NFTs trading platform, and the backend was implemented by Springboot + SpringMvc + Mybatis + PostgreSQL, and the frontend was implemented by React + MaterialUI.
