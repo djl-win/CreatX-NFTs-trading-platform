@@ -1,0 +1,11 @@
+
+.followsHeader {
+    text-transform: uppercase;
+    background: linear-gradient(to right, #30CFD0 0%, #330867 30%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 2.3%;
+    margin-left: 4.1%;
+}

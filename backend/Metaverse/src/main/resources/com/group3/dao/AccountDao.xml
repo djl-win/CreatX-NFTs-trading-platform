@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group3.dao.AccountDao">
+
+    <resultMap id="accountResultMap" type="Account">
+        <id property="accountId" column="account_id"/>
+        <result property="accountPublicKey" column="account_publickey"/>
+        <result property="accountAvatar" column="account_avatar"/>
+        <result property="accountBalance" column="account_balance"/>
+        <result property="accountDeleted" column="account_deleted"/>
+        <result property="accountUserId" column="account_userid"/>
+    </resultMap>
+
+    <select id="selectTest" resultMap="accountResultMap">
+        select *
+        from tb_account
+        where account_deleted != 1
+    </select>
+
+    <select id="fetchByUsername" resultMap="accountResultMap">
+        select account_id,account_publickey,account_avatar, account_balance, account_deleted,account_userid
+        from tb_account as a join tb_user as u on a.account_userid = u.user_id
+        where user_username = #{username} and account_deleted = 0 and user_deleted = 0
+    </select>
+
+    <insert id="insertWalletByUsername">
+        INSERT INTO tb_account(
+            account_publickey, account_avatar, account_balance, account_deleted, account_userid)
+        VALUES (#{account.accountPublicKey}, #{account.accountAvatar}, #{account.accountBalance}, #{account.accountDeleted}, #{account.accountUserId});
+    </insert>
+
+    <update id="updateBalanceByAvatar">
+        UPDATE tb_account
+        SET  account_balance = account_balance + #{amount}
+        WHERE account_avatar=#{username} and account_deleted=0;
+    </update>
+
+    <select id="fetchByUserId" resultMap="accountResultMap">
+        Select account_Id, account_publickey, account_avatar, account_balance, account_deleted, account_userid
+        from tb_account
+        where account_userid=#{userid}
+    </select>
+
+    <update id="updateBalanceByUserId">
+        UPDATE tb_account
+        SET account_balance = account_balance - #{bid}
+        WHERE account_userid = #{userid};
+    </update>
+
+    <update id="increaseBalanceByUserId">
+        UPDATE tb_account
+        SET account_balance = account_balance + #{bid}
+        WHERE account_userid = #{userid};
+    </update>
+
+</mapper>

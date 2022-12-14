@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group3.dao.NftDao">
+
+    <resultMap id="nftResultMap" type="Nft">
+        <id property="nftId" column="nft_id"/>
+        <result property="nftSignature" column="nft_signature"/>
+        <result property="nftUrl" column="nft_url"/>
+        <result property="nftPrice" column="nft_price"/>
+        <result property="nftDescription" column="nft_description"/>
+        <result property="nftLikes" column="nft_likes"/>
+        <result property="nftDeleted" column="nft_deleted"/>
+        <result property="nftVersion" column="nft_version"/>
+        <result property="nftUserId" column="nft_userid"/>
+        <!--association定义多对一或者一对一的关系-->
+        <association property="userDetail">
+            <id property="userDetailId" column="userdetail_id"/>
+            <result property="userDetailName" column="userdetail_name"/>
+            <result property="userDetailEmail" column="userdetail_email"/>
+            <result property="userDetailPhone" column="userdetail_phone"/>
+            <result property="userDetailDeleted" column="userdetail_deleted"/>
+            <result property="userDetailUserId" column="userdetail_userid"/>
+        </association>
+    </resultMap>
+
+
+    <select id="selectTest" resultMap="nftResultMap">
+        select *
+        from tb_nft
+        where nft_deleted != 1
+    </select>
+
+    <insert id="insertNft">
+        INSERT INTO public.tb_nft(
+            nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_version, nft_userid)
+        VALUES (#{nft.nftSignature}, #{nft.nftUrl}, #{nft.nftPrice}, #{nft.nftDescription}, #{nft.nftLikes}, #{nft.nftVersion}, #{nft.nftUserId});
+    </insert>
+
+    <select id="selectAllNftsByUserId" resultMap="nftResultMap">
+        SELECT nft_id, nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_deleted, nft_version, nft_userid
+        FROM tb_nft
+        Where nft_userid = #{userid} and nft_version = 0
+        ORDER BY nft_id ASC
+    </select>
+
+    <update id="modifyNftVersionAndPrice">
+         UPDATE tb_nft
+	     SET  nft_version = 1 , nft_price = #{nft.nftPrice}
+	     WHERE nft_id= #{nft.nftId}
+    </update>
+
+    <select id="selectAllNftOnSellByUserId" resultMap="nftResultMap">
+        SELECT nft_id, nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_deleted, nft_version, nft_userid
+        FROM tb_nft
+        Where nft_userid = #{userid} and nft_version = 1
+        ORDER BY nft_id ASC
+    </select>
+
+    <select id="selectNftByNftId"  resultMap="nftResultMap">
+        SELECT nft_id, nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_deleted, nft_version, nft_userid
+        FROM tb_nft
+        Where nft_id = #{nftid}
+    </select>
+
+    <select id="fetchNftByPageNumber" resultMap="nftResultMap">
+        SELECT nft_id, nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_deleted, nft_version, nft_userid
+        FROM tb_nft
+        order by nft_id
+        LIMIT 8 offset #{pageNumber}*8;
+    </select>
+
+    <select id="selectNftCount" resultType="java.lang.Integer">
+        SELECT count(nft_id)
+        FROM tb_nft
+    </select>
+
+    <update id="updateNftLikesByNftId">
+        UPDATE tb_nft
+        SET nft_likes= #{nft.nftLikes}+1
+        WHERE  nft_id= #{nft.nftId}
+    </update>
+
+    <select id="selectNftByPageNumber" resultMap="nftResultMap">
+        SELECT nft_id, nft_signature, nft_url, nft_price, nft_description, nft_likes, nft_deleted, nft_version, nft_userid
+        FROM tb_nft
+        Where nft_version = 1 and nft_userid != #{userId}
+        order by nft_id
+        LIMIT 8 offset #{pageNumber}*8;
+
+    </select>
+
+    <select id="selectNftOnMarketCount" resultType="java.lang.Integer">
+        SELECT count(nft_id)
+        FROM tb_nft
+        WHERE nft_version = 1 and nft_userid != #{userId}
+    </select>
+
+    <update id="tradeNft">
+        UPDATE tb_nft
+        SET nft_userid = #{nft.nftUserId}, nft_version = #{nft.nftVersion}, nft_price = #{nft.nftPrice}
+        WHERE nft_id= #{nft.nftId}
+    </update>
+
+    <select id="selectNftOrderByLike" resultMap="nftResultMap">
+        SELECT a.nft_id, a.nft_signature, a.nft_url, a.nft_price,
+               a.nft_description, a.nft_likes, a.nft_deleted, a.nft_version, a.nft_userid, b.userdetail_name
+        FROM tb_nft as a join tb_userdetail as b on a.nft_userid = b.userdetail_userid
+        order by a.nft_likes desc;
+    </select>
+</mapper>

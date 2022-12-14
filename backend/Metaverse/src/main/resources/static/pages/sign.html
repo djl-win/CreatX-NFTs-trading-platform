@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/sign.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css'>
+</head>
+<body>
+<div id="loginForm" class="loginbody" >
+
+
+    <video class="video-background" preload="auto" loop playsinline autoplay src="../asset/login_background.mp4" tabindex="-1" muted="muted"></video>
+
+
+            <div class="logindata" :style="{'display': showLoginForm}">
+        <div class="logintext">
+            <h2>WELCOME TO METAVERSE</h2>
+        </div>
+        <div class="formdata">
+            <el-form class="inputK" ref="loginForm" :model="loginForm" :rules="rules">
+                <el-form-item prop="userUsername">
+                    <el-input
+                            v-model="loginForm.userUsername"
+                            clearable
+                            placeholder="Please enter your username"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="userPassword">
+                    <el-input
+                            v-model="loginForm.userPassword"
+                            clearable
+                            placeholder="Please enter your password"
+                            show-password
+                    ></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+        <div class="tool">
+            <div>
+                <el-checkbox id = "rem" v-model="checked" @change="remember">
+                    <span>remember password</span>
+                </el-checkbox
+                >
+            </div>
+            <div>
+                <span class="shou" @click="forgetpas">forgot password？</span>
+            </div>
+        </div>
+        <div class="butt">
+            <el-button type="primary" @click.native.prevent="login('loginForm')"
+            >sign in
+            </el-button
+            >
+            <el-button @click="dialogVisible = true">register</el-button>
+        </div>
+    </div>
+
+    <!-- 注册页面 -->
+    <div class="registerBody">
+        <el-dialog
+                title="Register"
+                :visible.sync="dialogVisible"
+                width="60%"
+                :before-close="handleClose"
+                append-to-body> <!--append取出阴影-->
+
+            <el-form :model="registerForm" :rules="rules" ref="registerForm" prop="registerForm"
+                     class="registerFormBody">
+                <el-form-item prop="userUsername">
+
+                    Username:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <el-input
+                            id="registerText1"
+                            style="width:300px"
+                            v-model="registerForm.userUsername"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="userPassword">
+                    Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <el-input
+                            id="registerText2"
+                            style="width:300px"
+                            v-model="registerForm.userPassword"
+                            show-password
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="checkPassword">
+                    Password again:&nbsp&nbsp
+                    <el-input
+                            id="registerText3"
+                            style="width:300px"
+                            v-model="registerForm.checkPassword"
+                            show-password
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="userDetailName">
+                    Full name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <el-input
+                            id="registerText4"
+                            style="width:300px"
+                            v-model="registerForm.userDetailName"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="userDetailEmail">
+                    Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <el-input
+                            id="registerText5"
+                            style="width:300px"
+                            v-model="registerForm.userDetailEmail"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="userDetailPhone">
+                    Phone:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <el-input
+                            id="registerText6"
+                            style="width:300px"
+                            v-model="registerForm.userDetailPhone"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item prop="mailCode">
+                    <div class = "codecss">
+                        <div>
+                            <span>checked code:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                        </div>
+                        <div>
+                            <el-input
+                                    id="registerText7"
+                                    style="width:100px"
+                                    maxlength="6"
+                                    v-model="registerForm.mailCode"
+                            ></el-input>
+                        </div>
+                        <div>
+                            <el-form-item>
+                            <el-button @click="sendEmail">Send Email</el-button>
+                            </el-form-item>
+                        </div>
+                    </div>
+
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="register('registerForm')" align="center">Sign up</el-button>
+                    <el-button type="danger" @click="dialogVisible=false" align="center">Cancel</el-button>
+                </el-form-item>
+            </el-form>
+
+            </span>
+        </el-dialog>
+    </div>
+
+    <!-- 验证码页面 -->
+    <div class="verificationBody" :style="{'display': VisibleVerification}">
+        <form class="verification" :model="VerificationEl">
+            <section class="verification__wrap">
+                <header class="verification__header">
+                    <div class="verification__title">Verification Code</div>
+                    <p class="verification__description">
+                        we was send 6 length verification code, enter it within 120s
+                    </p>
+                </header>
+
+                <section class="verification__fields">
+                    <fieldset class="verification__field">
+                        <legend>
+                            <!-- HINT : write something here for more accessible -->
+                        </legend>
+                        <input v-model="VerificationEl.el1" type="text" class="verification__input verification__input--1" id="verification-input-1" placeholder="-" maxlength="1" />
+                        <input v-model="VerificationEl.el2" type="text" class="verification__input verification__input--2" id="verification-input-2" placeholder="-" maxlength="1" />
+                        <input v-model="VerificationEl.el3" type="text" class="verification__input verification__input--3" id="verification-input-3" placeholder="-" maxlength="1" />
+                        <input v-model="VerificationEl.el4" type="text" class="verification__input verification__input--4" id="verification-input-4" placeholder="-" maxlength="1" />
+                        <input v-model="VerificationEl.el5" type="text" class="verification__input verification__input--5" id="verification-input-5" placeholder="-" maxlength="1" />
+                        <input v-model="VerificationEl.el6" type="text" class="verification__input verification__input--6" id="verification-input-6" placeholder="-" maxlength="1" />
+                    </fieldset>
+                </section>
+
+                <section class="verification__verify">
+                    <p>
+                        <input type="button" class="verification__verify_btn" @click="submitVerificationCode('loginForm')" value="VERIFY"></input>
+                    </p>
+                </section>
+            </section>
+        </form>
+    </div>
+
+
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="../js/sign.js"></script>
+
+</html>
+

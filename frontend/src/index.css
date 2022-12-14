@@ -1,0 +1,253 @@
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  /* font color */
+  font-family: "IBM Plex Sana Thai Looped", sans-serif;
+  color: black;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.homeHeader{
+  display: flex;
+  margin-right: 0;
+  /* border-bottom: 2px solid #ccc; */
+  /* border shadow */
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1); */
+  /* box-Shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1),0 8px 32px 0 rgba(202, 202, 202, 0.37) */
+
+  
+}
+
+.headerSearch{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* It's 0.7% away from the left element */
+  margin-top: 0.7%;
+
+  justify-content: center;
+}
+
+/* Right side of the search box */
+.headerExplore{
+  display: flex;
+  /* border: 20px solid #ccc; */
+  /* Distance adjustment on the right side of the search box*/
+  margin-right: 1%;
+}
+
+/* Overall Routing interface div */
+.footerPage{
+  /* If display is flex, the size of the div will vary with the size of the inner div, such as the one in the following class */
+  display: flex;
+}
+
+/* ----------------------------------------------------------------------------- */
+
+/* Register Page the overall background layout */
+.RegisterPage{
+  font-style: italic;
+  text-align: center;
+  /* Expand the width and height to fill the screen */
+	width: 100%;
+  height: 809px;
+}
+
+/* register page font，Create you account firstly */
+.RegisterText{
+  /* The adjustment inside div, the distance from the div that wraps the tag */
+  padding-top: 2%; 
+  font-size: 1.5rem;
+}
+
+/* register Page Reminder text，You need to create     */
+.RegisterRemind{
+  /* The adjustment inside div, the distance from the previous tag div */
+  margin-top: 2%;
+  font-size: 1.2rem;
+}
+
+/* register page button */
+.RegisterButton{
+  margin-top: 3%;
+}
+
+/* register card */
+.RegisterCard{
+  /* Using the child tag as an input tag, you can use the alignment method in the parent div */
+  display:inline-block;
+  margin-top: 2%;
+  margin-right: 4.5%;
+  /* border shadow */
+  border: 2px none #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+/* ----------------------------------------------------------------------------- */
+
+/* wallet page css */
+.walletPage{
+  /* border: 20px solid rgb(201, 18, 18); */
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-align: center;
+  margin-top: 4%;
+}
+.walletCard{
+  background-color: aliceblue;
+  display:inline-block;
+  border: 3px none #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.walletLeft{
+  /* Left background color */
+  background-color:rgb(192,192,192,0.1);
+  width: 300px;
+  height: 600px;
+}
+
+.walletLeftAvator{
+  display:inline-block;
+  padding-top: 17%;
+}
+
+.walletLeftPubKey{
+  /* Text left and right spacing */
+  padding-left:10px;
+  padding-right:5px;
+  padding-top: 3px;
+  /* Center, center div before you set the width */
+  display: inline-block;
+  /* Font format */
+  width: 40%;
+  height: 18px;
+  background-color: rgb(192,192,192,0.6);
+  /* font size */
+  font-size: small;
+  font-style: italic;
+
+  white-space: nowrap;/*Set no line breaks*/
+  overflow: hidden; /*set hidden text*/
+  text-overflow: ellipsis; /*Set the hidden part to an ellipsis*/
+
+}
+
+.walletLeftBalance{
+  /* border: 20px solid rgb(201, 18, 18); */
+  display: flex;
+  background-color: rgb(131,137,150) ;
+  margin-top: 30px;
+  height: 100px;
+}
+
+.walletLeftBalanceAvatar{
+  padding-top: 25px;
+  padding-left: 20px;
+  /* border: 20px solid rgb(201, 18, 18); */
+}
+.walletLeftFooter{
+  margin-top: 30%;
+  color:rgb(131,137,150);
+  font-size: 15px;
+}
+
+/* wallet card right area */
+
+.walletRight{
+  /* right area backgroud */
+  /* background-color:rgb(192,192,192,0.05); */
+  width: 600px;
+  height: 600px;
+}
+
+.walletRightBalance{
+  /* border: 20px solid rgb(201, 18, 18); */
+  display: flex;
+  margin-top: 20px;
+  height: 100px;
+}
+
+.walletRightBalanceAvatar{
+  padding-top: 25px;
+  padding-left: 40px;
+  /* border: 20px solid rgb(201, 18, 18); */
+}
+.walletRightBalanceCharge{
+  /* border: 20px solid rgb(201, 18, 18); */
+  width: 100%;
+  /* align right  */
+  text-align: right;
+  margin-top: 4%;
+  margin-right: 30px;
+}
+
+/* ----------------------------------------------------------------------------- */
+
+/* nft page css */
+.nftPage{
+  margin-top: 0%;
+  /* border: 20px solid rgb(201, 18, 18); */
+  /* font-family: Arial, Helvetica, sans-serif; */
+  width: 100%;
+  height: auto;
+
+ 
+}
+
+.nftHeader{
+  /* border: 20px solid rgb(21, 18, 18); */
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+.nftHeaderText{
+  /* border: 20px solid rgb(21, 18, 18); */
+  margin-left: 4%;
+  text-transform: uppercase;
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size:30px;
+  
+}
+.nftHeaderButtonCreateNft{
+  border: 6px none #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
+  margin-left: 10%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+
+.nftHeaderButtonCreateNft1{
+  border: 6px none #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
+  margin-left: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+/* Images are displayed at the bottom of the nft page */
+.nftBody{
+
+}
