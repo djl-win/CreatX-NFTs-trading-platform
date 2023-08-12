@@ -112,6 +112,11 @@ http://localhost:8080/5620/pages/mIndex.html
 
 ![a337b32a0925c4c9672a172aa81be30](https://user-images.githubusercontent.com/75836965/200224465-93446ee1-efc6-42c9-a52c-7bf904f55254.jpg)
 
+## License
+
+This project is licensed under the GNU GPLv3 License - see the [LICENSE](https://github.com/djl-win/CreatX-NFTs-trading-platform/blob/main/LICENSE) file for details.
+
+
 
 ![3c189f89bff69828ebab9141f814409](https://user-images.githubusercontent.com/75836965/200224472-486143ec-0a04-4c4c-9dc7-4a564b8e2784.jpg)
 
